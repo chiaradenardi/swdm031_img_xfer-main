@@ -1,0 +1,4 @@
+storage_partition:
+  address: 0x161000
+  size: 0x4000
+  region: flash_primary

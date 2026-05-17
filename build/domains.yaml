@@ -1,0 +1,7 @@
+default: swdm031_img_xfer-main
+build_dir: C:/Users/denar/Desktop/swdm031_img_xfer-main/build
+domains:
+  - name: swdm031_img_xfer-main
+    build_dir: C:/Users/denar/Desktop/swdm031_img_xfer-main/build/swdm031_img_xfer-main
+flash_order:
+  - swdm031_img_xfer-main

@@ -1,0 +1,17 @@
+description: Edge detector device
+
+compatible: "zephyr,xiaosync-capture"
+
+include: base.yaml
+
+properties:
+  capture-gpios:
+    type: phandle-array
+    required: true
+    description: GPIO pin for the external trigger signal.
+
+  capture-edge:
+    type: int
+    required: true
+    description: Trigger signal active edge (0 = rising; 1 = falling; 2 = either)
+

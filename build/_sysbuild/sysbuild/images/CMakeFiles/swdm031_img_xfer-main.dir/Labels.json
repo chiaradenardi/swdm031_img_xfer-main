@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/CMakeFiles/swdm031_img_xfer-main"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/CMakeFiles/swdm031_img_xfer-main.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/CMakeFiles/swdm031_img_xfer-main-complete.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-build.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-configure.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-download.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-install.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-patch.rule"
+		},
+		{
+			"file" : "C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"swdm031_img_xfer-main"
+		],
+		"name" : "swdm031_img_xfer-main"
+	}
+}

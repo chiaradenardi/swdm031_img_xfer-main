@@ -1,0 +1,11 @@
+# ninja log v5
+4	700	8007203263834521	_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-mkdir	2171b46f78c049d1
+4	700	8007203263834521	C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-mkdir	2171b46f78c049d1
+703	969	8007203266604983	_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-download	46bad89e4539e109
+703	969	8007203266604983	C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-download	46bad89e4539e109
+970	1163	8007203268590606	_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-update	cf9a57a765a59f3a
+970	1163	8007203268590606	C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-update	cf9a57a765a59f3a
+1163	1372	8007203270640507	_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-patch	4c0009e0b1651fa
+1163	1372	8007203270640507	C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-patch	4c0009e0b1651fa
+1374	1538	8007203272336111	_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-configure	82a82c2235fa9484
+1374	1538	8007203272336111	C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-configure	82a82c2235fa9484

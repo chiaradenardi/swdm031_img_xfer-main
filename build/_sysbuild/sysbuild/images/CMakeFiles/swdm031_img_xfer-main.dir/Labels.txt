@@ -1,0 +1,13 @@
+# Target labels
+ swdm031_img_xfer-main
+# Source files and their labels
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/CMakeFiles/swdm031_img_xfer-main
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/CMakeFiles/swdm031_img_xfer-main.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/CMakeFiles/swdm031_img_xfer-main-complete.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-build.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-configure.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-download.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-install.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-mkdir.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-patch.rule
+C:/Users/denar/Desktop/swdm031_img_xfer-main/build/_sysbuild/sysbuild/images/swdm031_img_xfer-main-prefix/src/swdm031_img_xfer-main-stamp/swdm031_img_xfer-main-update.rule
