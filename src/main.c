@@ -179,8 +179,16 @@ int main( void )
         LOG_INF( "Minor firmware version: 0x%02X", version.minor );
     }
 
-    
-    /* The entry function for transmitter or receiver. */
+    while (true) {
+        int64_t delta_us = getDeltaMicroSeconds();
+
+        if (delta_us >= 0) {
+        LOG_INF("time since epoch: %" PRId64 " us", delta_us);
+        }
+
+        k_sleep(K_SECONDS(1));
+    }    
+  /* The entry function for transmitter or receiver. */
     image_transfer_entry( );
 
     while( true )

@@ -1692,7 +1692,6 @@
 #define DT_N_S_soc_S_peripheral_50000000_S_gpio_50400_SUPPORTS_ORDS \
 	14, /* /rfsw-ctl */ \
 	15, /* /rfsw-pwr */ \
-	20, /* /xiaosync-capture */ \
 	28, /* /leds */ \
 	29, /* /leds/led_0 */
 
@@ -2351,6 +2350,7 @@
 /* Ordinals for what depends directly on this node: */
 #define DT_N_S_soc_S_peripheral_50000000_S_gpio_d8200_SUPPORTS_ORDS \
 	19, /* /vbat-pwr */ \
+	20, /* /xiaosync-capture */ \
 	137, /* /soc/peripheral@50000000/spi@4a000 */ \
 	138, /* /soc/peripheral@50000000/spi@4a000/lora@0 */ \
 	139, /* /soc/peripheral@50000000/spi@4a000/lora@0/dios */ \
@@ -2624,7 +2624,7 @@
 /* Ordinals for what this node depends on directly: */
 #define DT_N_S_xiaosync_capture_REQUIRES_ORDS \
 	0, /* / */ \
-	13, /* /soc/peripheral@50000000/gpio@50400 */
+	18, /* /soc/peripheral@50000000/gpio@d8200 */
 
 /* Ordinals for what depends directly on this node: */
 #define DT_N_S_xiaosync_capture_SUPPORTS_ORDS /* nothing */
@@ -2653,8 +2653,8 @@
 
 /* Generic property macros: */
 #define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_EXISTS 1
-#define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_PH DT_N_S_soc_S_peripheral_50000000_S_gpio_50400
-#define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_VAL_pin 8
+#define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_PH DT_N_S_soc_S_peripheral_50000000_S_gpio_d8200
+#define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_VAL_pin 4
 #define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_VAL_pin_EXISTS 1
 #define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_VAL_flags 32
 #define DT_N_S_xiaosync_capture_P_capture_gpios_IDX_0_VAL_flags_EXISTS 1

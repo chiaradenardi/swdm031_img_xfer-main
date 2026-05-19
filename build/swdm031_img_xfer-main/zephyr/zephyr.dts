@@ -712,8 +712,8 @@
 					multiplex-ratio = < 0x3f >;       /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:50 */
 					segment-remap;                    /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:51 */
 					com-invdir;                       /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:52 */
-					prechargep = < 0x22 >;            /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:53 */
-					inversion-on;                     /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:54 */
+					prechargep = < 0x22 >;            /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:54 */
+					inversion-on;                     /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:55 */
 				};
 			};
 
@@ -1378,7 +1378,7 @@
 		lora-transceiver = &lora_semtech_wio_lr20xx; /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\usp_preview\usp_zephyr\boards\shields\semtech_wio_lr20xx\semtech_wio_lr20xx_common.dtsi:14 */
 		smtc-watchdog = &wdt31;                      /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:9 */
 		smtc-user-button = &usr_btn;                 /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:10 */
-		sync0 = &xiaosync_capture;                   /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:68 */
+		sync0 = &xiaosync_capture;                   /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:69 */
 	};
 
 	/* node '/pdm-imu-pwr' defined in zephyr\boards\seeed\xiao_nrf54l15\xiao_nrf54l15_nrf54l15_cpuapp.dts:14 */
@@ -1411,10 +1411,10 @@
 		enable-gpios = < &gpio1 0xf 0x0 >; /* in zephyr\boards\seeed\xiao_nrf54l15\xiao_nrf54l15_nrf54l15_cpuapp.dts:37 */
 	};
 
-	/* node '/xiaosync-capture' defined in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:60 */
+	/* node '/xiaosync-capture' defined in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:61 */
 	xiaosync_capture: xiaosync-capture {
-		compatible = "zephyr,xiaosync-capture"; /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:61 */
-		capture-gpios = < &gpio2 0x8 0x20 >;    /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:63 */
-		capture-edge = < 0x0 >;                 /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:64 */
+		compatible = "zephyr,xiaosync-capture"; /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:62 */
+		capture-gpios = < &gpio1 0x4 0x20 >;    /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:64 */
+		capture-edge = < 0x0 >;                 /* in ..\..\Users\denar\Desktop\swdm031_img_xfer-main\boards\xiao_nrf54l15_nrf54l15_cpuapp.overlay:65 */
 	};
 };

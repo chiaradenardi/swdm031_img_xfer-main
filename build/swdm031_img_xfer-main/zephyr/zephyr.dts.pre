@@ -1921,6 +1921,7 @@ lora_semtech_wio_lr2021: &lora_semtech_wio_lr20xx {
   multiplex-ratio = <63>;
   segment-remap;
   com-invdir;
+
   prechargep = <0x22>;
   inversion-on;
  };
@@ -1931,7 +1932,7 @@ lora_semtech_wio_lr2021: &lora_semtech_wio_lr20xx {
   xiaosync_capture: xiaosync-capture {
     compatible = "zephyr,xiaosync-capture";
 
-    capture-gpios = <&gpio2 8 ((1 << 5) | (0 << 0))>;
+    capture-gpios = <&gpio1 4 ((1 << 5) | (0 << 0))>;
     capture-edge = <0>;
   };
 
