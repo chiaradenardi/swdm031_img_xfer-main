@@ -179,15 +179,20 @@ int main( void )
         LOG_INF( "Minor firmware version: 0x%02X", version.minor );
     }
 
-    while (true) {
-        int64_t delta_us = getDeltaMicroSeconds();
+    //AGGIUNTA PER SYNCH
+    LOG_INF("In attesa del segnale di sincronizzazione hardware...");
 
-        if (delta_us >= 0) {
-        LOG_INF("time since epoch: %" PRId64 " us", delta_us);
-        }
-
-        k_sleep(K_SECONDS(1));
-    }    
+    // 1. Sala d'attesa: il programma resta bloccato qui finché il valore è -1
+    while (getDeltaMicroSeconds() == -1) {
+        // Dorme solo per 10 millisecondi. Così è reattivissimo appena arriva il segnale!
+        k_sleep(K_MSEC(10)); 
+    }
+    // Questo ignorerà i rimbalzi del cavo e i futuri rumori elettrici.
+    syncDisable();
+    // 2. Se il codice arriva a questa riga, il while è finito. 
+    // Significa che l'impulso è arrivato e il valore è >= 0!
+    int64_t delta_us = getDeltaMicroSeconds();
+    LOG_INF("Sincronizzazione avvenuta! time since epoch: %" PRId64 " us", delta_us);  
   /* The entry function for transmitter or receiver. */
     image_transfer_entry( );
 
