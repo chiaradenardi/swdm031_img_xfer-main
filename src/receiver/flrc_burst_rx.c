@@ -174,7 +174,7 @@ void image_transfer_entry( void )
     /* Start to listen the WOR packet */
     flrc_burst_rx.state = FLRC_BURST_RX_STATE_CAD;
     rx_end_timestamp    = 0;
-    listen_wor_packet( smtc_modem_hal_get_time_in_ms( ) + MARGIN_RADIO_MS / 2 );
+    listen_wor_packet( smtc_modem_hal_get_time_in_ms( ) + MARGIN_RADIO_MS);
 }
 
 /*
@@ -187,6 +187,8 @@ static void post_transaction_callback( rp_status_t status )
     switch( status )
     {
     case RP_STATUS_TX_DONE:
+        LOG_INF("TX callback status: %d", status);
+
         if( flrc_burst_rx.state == FLRC_BURST_RX_STATE_WOR_ACK_TX )
         {
             flrc_burst_rx.state = FLRC_BURST_RX_STATE_RX_DATA;
@@ -200,6 +202,7 @@ static void post_transaction_callback( rp_status_t status )
         break;
 
     case RP_STATUS_RX_PACKET:
+        LOG_INF("WOR packet RICEVUTO! Status: %d", status);
         if( flrc_burst_rx.state == FLRC_BURST_RX_STATE_CAD )
         {
             if( ( lora_payload[0] == 'W' ) && ( lora_payload[1] == 'O' ) && ( lora_payload[2] == 'R' ) )
@@ -380,6 +383,15 @@ static void post_transaction_callback( rp_status_t status )
 
 static void listen_wor_packet( uint32_t timestamp_ms )
 {
+    uint32_t now = smtc_modem_hal_get_time_in_ms();
+    int32_t delay = (int32_t)(timestamp_ms - now);
+    
+    LOG_INF("RX CONFIG: now=%u ms, scheduled=%u ms, delay=%d ms", 
+            now, timestamp_ms, delay);
+    
+    if (delay < 0) {
+        LOG_ERR("ERROR: RX timestamp nel passato!");
+    }
     LOG_INF( "\n" );
     LOG_INF( "Open RX in the %u ms", timestamp_ms - smtc_modem_hal_get_time_in_ms( ) );
 #if ( !IS_DISPLAY_IMAGE_MODE )

@@ -129,7 +129,7 @@ extern "C" {
  * @brief Time margin (Unit: ms)
  */
 #ifndef MARGIN_RADIO_MS
-#define MARGIN_RADIO_MS 20
+#define MARGIN_RADIO_MS 50
 #endif
 
 /*********************************

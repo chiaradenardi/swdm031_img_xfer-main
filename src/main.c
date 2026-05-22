@@ -123,6 +123,8 @@ static void user_button_callback( const struct device* dev, struct gpio_callback
 
 int main( void )
 {
+    LOG_INF("=== BOOT SEQUENCE START ===");
+    uint32_t boot_start = smtc_modem_hal_get_time_in_ms();
     //Aggiunta per sync
     int err = syncInit();
     if (err == 0) {
@@ -179,21 +181,28 @@ int main( void )
         LOG_INF( "Minor firmware version: 0x%02X", version.minor );
     }
 
-    //AGGIUNTA PER SYNCH
-    LOG_INF("In attesa del segnale di sincronizzazione hardware...");
+    //AGGIUNTA PER SYNCH 
+    LOG_INF("\n=== SYNCHRONIZATION PHASE ===");
+    LOG_INF("Waiting for HW sync edge on P1.04...");
 
-    // 1. Sala d'attesa: il programma resta bloccato qui finché il valore è -1
     while (getDeltaMicroSeconds() == -1) {
-        // Dorme solo per 10 millisecondi. Così è reattivissimo appena arriva il segnale!
         k_sleep(K_MSEC(10)); 
     }
-    // Questo ignorerà i rimbalzi del cavo e i futuri rumori elettrici.
+
     syncDisable();
-    // 2. Se il codice arriva a questa riga, il while è finito. 
-    // Significa che l'impulso è arrivato e il valore è >= 0!
     int64_t delta_us = getDeltaMicroSeconds();
-    LOG_INF("Sincronizzazione avvenuta! time since epoch: %" PRId64 " us", delta_us);  
-  /* The entry function for transmitter or receiver. */
+    LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
+
+    uint32_t sync_detected = smtc_modem_hal_get_time_in_ms();
+    LOG_INF("Time to detect sync: %u ms", sync_detected - boot_start);
+
+    // IMPORTANTE: Aspettare 50ms prima di iniziare la radio
+    // Questo sincronizza TX e RX nello stesso momento
+    LOG_INF("Waiting 50ms before radio startup...");
+    k_msleep(50);
+
+    LOG_INF("✓ Starting image transfer\n");
+    LOG_INF("Time at radio start: %u ms", smtc_modem_hal_get_time_in_ms());
     image_transfer_entry( );
 
     while( true )
