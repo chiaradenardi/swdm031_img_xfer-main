@@ -184,6 +184,7 @@ int main( void )
     //AGGIUNTA PER SYNCH 
     LOG_INF("\n=== SYNCHRONIZATION PHASE ===");
     LOG_INF("Waiting for HW sync edge on P1.04...");
+    syncEnable();
 
     while (getDeltaMicroSeconds() == -1) {
         k_sleep(K_MSEC(10)); 

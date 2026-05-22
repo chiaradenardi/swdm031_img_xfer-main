@@ -96,7 +96,7 @@ static void gpioIRQHandler(nrfx_gpiote_pin_t pin, nrfx_gpiote_trigger_t trigger,
  */
 static void gpioteWorkHandler(struct k_work* work) {
   ARG_UNUSED(work);
-
+  LOG_INF(">>> INTERRUPT HARDWARE RILEVATO SUL PIN! <<<");
   // Get captured value from CC channel
   uint64_t ticks = nrfx_grtc_sys_counter_cc_get(gGrtcChannel);
 
