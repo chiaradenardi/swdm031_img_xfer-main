@@ -48,7 +48,6 @@ cmake:
     files:
      - 'C:/ncs/v3.2.4/zephyr/boards/seeed/xiao_nrf54l15/xiao_nrf54l15_nrf54l15_cpuapp_defconfig'
      - 'C:/Users/denar/Desktop/swdm031_img_xfer-main/prj.conf'
-     - 'C:/Users/denar/Desktop/swdm031_img_xfer-main/build/swdm031_img_xfer-main/zephyr/misc/generated/extra_kconfig_options.conf'
      - 'C:/Users/denar/Desktop/swdm031_img_xfer-main/build/swdm031_img_xfer-main/zephyr/.config.sysbuild'
     user-files:
      - 'C:/Users/denar/Desktop/swdm031_img_xfer-main/prj.conf'

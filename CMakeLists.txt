@@ -22,6 +22,7 @@ endif()
 
 target_include_directories(app PRIVATE
     src/common
+    src/xiaosync
 )
 file(GLOB COMMON src/common/*.c)
 

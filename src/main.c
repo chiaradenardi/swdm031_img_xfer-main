@@ -124,111 +124,83 @@ static void user_button_callback( const struct device* dev, struct gpio_callback
 int main( void )
 {
     LOG_INF("=== BOOT SEQUENCE START ===");
-    uint32_t boot_start = smtc_modem_hal_get_time_in_ms();
-    //Aggiunta per sync
+    
+    // 1. SYNC SUBITO
     int err = syncInit();
     if (err == 0) {
-        syncEnable();
+        syncEnable();  
         printk("Sistema di Sincronizzazione HW pronto su D0\n");
     } else {
         printk("Errore inizializzazione Sync: %d\n", err);
     }
 
-    LOG_INF( "===== LR20xx Image Transfer Demo =====" );
-
-    /* Startup logo */
-    boot_animation( );
-    while( 1 )
-    {
-        lv_timer_handler( );
-        if( anim_end_flag == true )
-        {
-            // Clear the whole display
-            lv_obj_clean( lv_scr_act( ) );
-            break;
-        }
-        k_msleep( 20 );
-    }
-    /* Boot animation has ended. Display for a while.*/
-    k_msleep( 1000 );
-
-    if( !gpio_is_ready_dt( &usr_led ) )
-    {
-        LOG_ERR( "user led is not ready" );
-    }
-    else
-    {
-        gpio_pin_configure_dt( &usr_led, GPIO_OUTPUT_ACTIVE );
-    }
-
-    if( configure_user_button( ) != 0 )
-    {
-        LOG_ERR( "Issue when configuring user button, aborting" );
-    }
-
-    //AGGIUNTA PER SYNCH 
-    LOG_INF("\n=== SYNCHRONIZATION PHASE ===");
     LOG_INF("Waiting for HW sync edge on P1.04...");
-    syncEnable();
-
     while (getDeltaMicroSeconds() == -1) {
         k_sleep(K_MSEC(10)); 
     }
 
     syncDisable();
-
-
-        int64_t delta_us = getDeltaMicroSeconds();
+    int64_t delta_us = getDeltaMicroSeconds();
     LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
 
-    uint32_t sync_detected = smtc_modem_hal_get_time_in_ms();
-    LOG_INF("Time to detect sync: %u ms", sync_detected - boot_start);
-
-    // IMPORTANTE: Aspettare 50ms prima di iniziare la radio
-    // Questo sincronizza TX e RX nello stesso momento
-    LOG_INF("Waiting 50ms before radio startup...");
-    k_msleep(50);
-
-    LOG_INF("✓ Starting image transfer\n");
-    LOG_INF("Time at radio start: %u ms", smtc_modem_hal_get_time_in_ms());
-
+    // 2. DOPO SYNC, INIZIALIZZA LA RADIO
     SMTC_SW_PLATFORM_INIT( );
     SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
+
     lr20xx_system_version_t version;
-    lr20xx_status_t         status;
-        void* radio_driver_context = smtc_rac_get_radio_driver_context( );
-    /* Get the firmware version */
+    lr20xx_status_t status;
+    void* radio_driver_context = smtc_rac_get_radio_driver_context( );
     status = lr20xx_system_get_version( radio_driver_context, &version );
-    if( status == LR20XX_STATUS_OK )
-    {
+    if( status == LR20XX_STATUS_OK ) {
         LOG_INF( "Major firmware version: 0x%02X", version.major );
         LOG_INF( "Minor firmware version: 0x%02X", version.minor );
     }
 
+    k_msleep(50);
 
+    LOG_INF( "===== LR20xx Image Transfer Demo =====" );
+
+    // 3. Boot animation
+    boot_animation( );
+    while( 1 ) {
+        lv_timer_handler( );
+        if( anim_end_flag == true ) {
+            lv_obj_clean( lv_scr_act( ) );
+            break;
+        }
+        k_msleep( 20 );
+    }
+    k_msleep( 1000 );
+
+    if( !gpio_is_ready_dt( &usr_led ) ) {
+        LOG_ERR( "user led is not ready" );
+    } else {
+        gpio_pin_configure_dt( &usr_led, GPIO_OUTPUT_ACTIVE );
+    }
+
+    if( configure_user_button( ) != 0 ) {
+        LOG_ERR( "Issue when configuring user button, aborting" );
+    }
+
+    LOG_INF("✓ Starting image transfer\n");
     image_transfer_entry( );
 
-    while( true )
-    {
-        if( user_button_is_press == true )
-        {
+    // Main loop
+    while( true ) {
+        if( user_button_is_press == true ) {
             user_button_is_press = false;
-
 #if CONFIG_TRANSMITTER
             flrc_raw_bit_rate_changed( );
 #endif
             LOG_INF( "User button pushed" );
         }
-
-        if( user_button_is_press == false )
-        {
+        if( user_button_is_press == false ) {
             k_sem_take( &periodical_event_sem, K_MSEC( 1000 ) );
         }
         gpio_pin_toggle_dt( &usr_led );
     }
     return 0;
 }
-
 /*
  * -----------------------------------------------------------------------------
  * --- PRIVATE FUNCTIONS DEFINITION --------------------------------------------
