@@ -166,21 +166,6 @@ int main( void )
         LOG_ERR( "Issue when configuring user button, aborting" );
     }
 
-    SMTC_SW_PLATFORM_INIT( );
-    SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
-
-    lr20xx_system_version_t version;
-    lr20xx_status_t         status;
-
-    void* radio_driver_context = smtc_rac_get_radio_driver_context( );
-    /* Get the firmware version */
-    status = lr20xx_system_get_version( radio_driver_context, &version );
-    if( status == LR20XX_STATUS_OK )
-    {
-        LOG_INF( "Major firmware version: 0x%02X", version.major );
-        LOG_INF( "Minor firmware version: 0x%02X", version.minor );
-    }
-
     //AGGIUNTA PER SYNCH 
     LOG_INF("\n=== SYNCHRONIZATION PHASE ===");
     LOG_INF("Waiting for HW sync edge on P1.04...");
@@ -191,7 +176,9 @@ int main( void )
     }
 
     syncDisable();
-    int64_t delta_us = getDeltaMicroSeconds();
+
+
+        int64_t delta_us = getDeltaMicroSeconds();
     LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
 
     uint32_t sync_detected = smtc_modem_hal_get_time_in_ms();
@@ -204,6 +191,21 @@ int main( void )
 
     LOG_INF("✓ Starting image transfer\n");
     LOG_INF("Time at radio start: %u ms", smtc_modem_hal_get_time_in_ms());
+
+    SMTC_SW_PLATFORM_INIT( );
+    SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
+    lr20xx_system_version_t version;
+    lr20xx_status_t         status;
+        void* radio_driver_context = smtc_rac_get_radio_driver_context( );
+    /* Get the firmware version */
+    status = lr20xx_system_get_version( radio_driver_context, &version );
+    if( status == LR20XX_STATUS_OK )
+    {
+        LOG_INF( "Major firmware version: 0x%02X", version.major );
+        LOG_INF( "Minor firmware version: 0x%02X", version.minor );
+    }
+
+
     image_transfer_entry( );
 
     while( true )
