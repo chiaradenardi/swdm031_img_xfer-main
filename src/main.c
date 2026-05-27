@@ -125,25 +125,7 @@ int main( void )
 {
     LOG_INF("=== BOOT SEQUENCE START ===");
     
-    // 1. SYNC SUBITO
-    int err = syncInit();
-    if (err == 0) {
-        syncEnable();  
-        printk("Sistema di Sincronizzazione HW pronto su D0\n");
-    } else {
-        printk("Errore inizializzazione Sync: %d\n", err);
-    }
-
-    LOG_INF("Waiting for HW sync edge on P1.04...");
-    while (getDeltaMicroSeconds() == -1) {
-        k_sleep(K_MSEC(10)); 
-    }
-
-    syncDisable();
-    int64_t delta_us = getDeltaMicroSeconds();
-    LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
-
-    // 2. DOPO SYNC, INIZIALIZZA LA RADIO
+    // 1. SMTC FIRST - PRIMA DI TUTTO
     SMTC_SW_PLATFORM_INIT( );
     SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
 
@@ -156,11 +138,9 @@ int main( void )
         LOG_INF( "Minor firmware version: 0x%02X", version.minor );
     }
 
-    k_msleep(50);
-
     LOG_INF( "===== LR20xx Image Transfer Demo =====" );
 
-    // 3. Boot animation
+    // 2. Boot animation
     boot_animation( );
     while( 1 ) {
         lv_timer_handler( );
@@ -182,6 +162,26 @@ int main( void )
         LOG_ERR( "Issue when configuring user button, aborting" );
     }
 
+    // 3. SYNC DOPO SMTC E ANIMATION
+    int err = syncInit();
+    if (err == 0) {
+        syncEnable();  
+        printk("Sistema di Sincronizzazione HW pronto su D0\n");
+    } else {
+        printk("Errore inizializzazione Sync: %d\n", err);
+    }
+
+    LOG_INF("Waiting for HW sync edge on P1.04...");
+    while (getDeltaMicroSeconds() == -1) {
+        k_sleep(K_MSEC(10)); 
+    }
+
+    syncDisable();
+    int64_t delta_us = getDeltaMicroSeconds();
+    LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
+
+    k_msleep(50);
+
     LOG_INF("✓ Starting image transfer\n");
     image_transfer_entry( );
 
@@ -201,6 +201,7 @@ int main( void )
     }
     return 0;
 }
+
 /*
  * -----------------------------------------------------------------------------
  * --- PRIVATE FUNCTIONS DEFINITION --------------------------------------------
