@@ -489,6 +489,7 @@ swdm031_img_xfer_SOURCE_DIR:STATIC=C:/Users/denar/Desktop/swdm031_img_xfer-main
 BOARD_DIRECTORIES:INTERNAL=C:/ncs/v3.2.4/zephyr/boards/seeed/xiao_nrf54l15
 //DT bindings root directories
 CACHED_DTS_ROOT_BINDINGS:INTERNAL=C:/ncs/v3.2.4/nrf/dts/bindings;C:/Users/denar/Desktop/swdm031_img_xfer-main/usp_preview/usp_zephyr/dts/bindings;C:/Users/denar/Desktop/swdm031_img_xfer-main/dts/bindings;C:/ncs/v3.2.4/zephyr/dts/bindings
+CLI_CONFIG_RECEIVER:INTERNAL=y
 //ADVANCED property for variable: CMAKE_ADDR2LINE
 CMAKE_ADDR2LINE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR

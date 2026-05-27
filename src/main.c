@@ -125,22 +125,7 @@ int main( void )
 {
     LOG_INF("=== BOOT SEQUENCE START ===");
     
-    // 1. SMTC FIRST - PRIMA DI TUTTO
-    SMTC_SW_PLATFORM_INIT( );
-    SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
-
-    lr20xx_system_version_t version;
-    lr20xx_status_t status;
-    void* radio_driver_context = smtc_rac_get_radio_driver_context( );
-    status = lr20xx_system_get_version( radio_driver_context, &version );
-    if( status == LR20XX_STATUS_OK ) {
-        LOG_INF( "Major firmware version: 0x%02X", version.major );
-        LOG_INF( "Minor firmware version: 0x%02X", version.minor );
-    }
-
-    LOG_INF( "===== LR20xx Image Transfer Demo =====" );
-
-    // 2. Boot animation
+    // 1. BOOT ANIMATION (senza radio)
     boot_animation( );
     while( 1 ) {
         lv_timer_handler( );
@@ -152,6 +137,7 @@ int main( void )
     }
     k_msleep( 1000 );
 
+    // 2. GPIO SETUP
     if( !gpio_is_ready_dt( &usr_led ) ) {
         LOG_ERR( "user led is not ready" );
     } else {
@@ -162,7 +148,7 @@ int main( void )
         LOG_ERR( "Issue when configuring user button, aborting" );
     }
 
-    // 3. SYNC DOPO SMTC E ANIMATION
+    // 3. SYNC INIT E WAIT
     int err = syncInit();
     if (err == 0) {
         syncEnable();  
@@ -179,6 +165,22 @@ int main( void )
     syncDisable();
     int64_t delta_us = getDeltaMicroSeconds();
     LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
+    k_msleep(200);
+
+    // 4. SMTC INIT (DOPO sync)
+    SMTC_SW_PLATFORM_INIT( );
+    SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
+
+    lr20xx_system_version_t version;
+    lr20xx_status_t status;
+    void* radio_driver_context = smtc_rac_get_radio_driver_context( );
+    status = lr20xx_system_get_version( radio_driver_context, &version );
+    if( status == LR20XX_STATUS_OK ) {
+        LOG_INF( "Major firmware version: 0x%02X", version.major );
+        LOG_INF( "Minor firmware version: 0x%02X", version.minor );
+    }
+
+    LOG_INF( "===== LR20xx Image Transfer Demo =====" );
 
     k_msleep(50);
 
@@ -201,7 +203,6 @@ int main( void )
     }
     return 0;
 }
-
 /*
  * -----------------------------------------------------------------------------
  * --- PRIVATE FUNCTIONS DEFINITION --------------------------------------------
