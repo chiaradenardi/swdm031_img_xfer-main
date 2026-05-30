@@ -20,6 +20,6 @@ cmake:
   sysbuild: 'true'
 version: '0.1.0'
 west:
-  command: 'C:\ncs\toolchains\fd21892d0f\opt\bin\Scripts\west build --pristine --board xiao_nrf54l15/nrf54l15/cpuapp -- -DCONFIG_RECEIVER=y'
+  command: 'C:\ncs\toolchains\fd21892d0f\opt\bin\Scripts\west build --pristine --board xiao_nrf54l15/nrf54l15/cpuapp'
   topdir: 'c:\ncs\v3.2.4'
   version: '1.4.0'

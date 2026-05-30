@@ -73,9 +73,6 @@ CMAKE_SKIP_RPATH:BOOL=NO
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //No help, variable specified on the command line.
-CONFIG_RECEIVER:UNINITIALIZED=y
-
-//No help, variable specified on the command line.
 WEST_PYTHON:UNINITIALIZED=C:/ncs/toolchains/fd21892d0f/opt/bin/python.exe
 
 //Zephyr base

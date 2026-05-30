@@ -44,3 +44,5 @@ int syncDisable(void);
  * @return Elapsed microseconds since epoch
  */
 int64_t getDeltaMicroSeconds(void);
+
+void syncDisableComplete(void);

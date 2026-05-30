@@ -125,7 +125,7 @@ int main( void )
 {
     LOG_INF("=== BOOT SEQUENCE START ===");
     
-    // 1. BOOT ANIMATION (senza radio)
+    // 1. BOOT ANIMATION
     boot_animation( );
     while( 1 ) {
         lv_timer_handler( );
@@ -135,7 +135,7 @@ int main( void )
         }
         k_msleep( 20 );
     }
-    k_msleep( 1000 );
+    k_msleep( 2000 );
 
     // 2. GPIO SETUP
     if( !gpio_is_ready_dt( &usr_led ) ) {
@@ -148,13 +148,11 @@ int main( void )
         LOG_ERR( "Issue when configuring user button, aborting" );
     }
 
-    // 3. SYNC INIT E WAIT
+    // 3. SYNC INIT E WAIT PRIMO
     int err = syncInit();
     if (err == 0) {
         syncEnable();  
         printk("Sistema di Sincronizzazione HW pronto su D0\n");
-    } else {
-        printk("Errore inizializzazione Sync: %d\n", err);
     }
 
     LOG_INF("Waiting for HW sync edge on P1.04...");
@@ -162,12 +160,14 @@ int main( void )
         k_sleep(K_MSEC(10)); 
     }
 
-    syncDisable();
+    // 4. DISABILITA XIAOSYNC SUBITO DOPO SYNC
+    syncDisableComplete(); 
     int64_t delta_us = getDeltaMicroSeconds();
     LOG_INF("✓ Sync detected! Epoch offset: %" PRId64 " us", delta_us);
-    k_msleep(200);
+    
+    k_msleep(500);
 
-    // 4. SMTC INIT (DOPO sync)
+    // 5. SMTC INIT DOPO CHE XIAOSYNC È DISABILITATO
     SMTC_SW_PLATFORM_INIT( );
     SMTC_SW_PLATFORM_VOID( smtc_rac_init( ) );
 

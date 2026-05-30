@@ -228,3 +228,9 @@ int64_t getDeltaMicroSeconds(void) {
 
   return (int64_t)(nrfx_grtc_syscounter_get() - epoch);
 }
+
+void syncDisableComplete(void) {
+    nrfx_gpiote_trigger_disable(kgGpiote, SYNC_INPUT_PIN);
+    k_work_cancel(&gCaptureWork);
+    nrfx_gpiote_channel_free(kgGpiote, gGpioteChannel);
+}
